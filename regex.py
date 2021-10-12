@@ -23,6 +23,14 @@ def find_word(string_list):
     """ Return a list of words that contain three digit numbers in the middle. """
 
     # initialize an empty list
+    new_list = []
+    for line in string_list:
+        three_didget_words =re.findall(r'\b[A-Za-z]+\d{3}[A-Za-z]+\b', line)
+        for word in three_didget_words:
+            new_list.append(word)
+    return new_list
+
+
 
     # define the regular expression
 
@@ -33,12 +41,17 @@ def find_word(string_list):
     # loop through the found words and add the words to your empty list 
 
     #return the list of all words that start with the letter B, E, or T
-    pass
 
 
 def find_days(string_list):
     """ Return a list of days from the list of strings the dates format in the text are MM/DD/YYYY. """  
-
+    new_list = []
+    for line in string_list:
+        date = re.findall('[0-9]{1,2}\W[0-9]{1,2}\W[0-9]{4}', line)
+        for i in date:
+            dates = i.split('/')
+            new_list.append(dates[1])
+    return new_list
     # initialize an empty list
 
     # define the regular expression
@@ -50,10 +63,20 @@ def find_days(string_list):
     # loop through the found dates and only add the days to your empty list 
     
     #return the list of days
-    pass
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
+    new_list = []
+    for line in string_list:
+        web_addresses = re.findall('[a-z]*:\W{2}[a-z].*\w', line)
+        for i in web_addresses:
+            values = i.split('//')
+            name = values[1]
+            name = name.strip("www.")
+            new_list.append(name)
+    return new_list
+
+
 
     # initialize an empty list
 
@@ -71,8 +94,6 @@ def find_domains(string_list):
     # add the domains to your empty list
     
     #return the list of domains
-    pass
-
 class TestAllMethods(unittest.TestCase):
 
 
